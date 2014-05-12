@@ -5,6 +5,7 @@
 // });
 
 
+Route::patch('tasks/{id}',['as' => 'tasks.update', 'uses' => 'TasksController@update'] );
 
 Route::get('/',['as' => 'home', 'uses' => 'TasksController@index'] );
 

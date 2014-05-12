@@ -9,7 +9,7 @@ class TasksController extends BaseController
 
 	public function index(){
 
-		$tasks = Task::with('user')->get();
+		$tasks = Task::with('user')->where('completed', 0)->get();
 		$users = User::lists('username','id');
 
 		return View::make('tasks.index', compact('tasks', 'users'));
@@ -35,6 +35,19 @@ class TasksController extends BaseController
 		
 
 		return Redirect::home();
+	}
+
+	public function update($id){
+
+		$task = Task::find($id);
+
+		$task->completed = Input::get('completed')? Input::get('completed') : 0;
+
+		$task->save();
+
+		return Redirect::home();
+
+
 	}
 
 }
